@@ -104,10 +104,14 @@ const caesar = function(sentence, shift) {
         }
         return String.fromCharCode.apply(null, newArray);
     }
+
+    else if (shift == 0) {
+        return sentence;
+    }
 }
 
 sentence = "Hello, World!";
-shift = 5;
+shift = -5;
 console.log(caesar(sentence, shift));
 
 // module.exports = caesar
