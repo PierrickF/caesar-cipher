@@ -113,5 +113,3 @@ const caesar = function(sentence, shift) {
 sentence = "Hello, World!";
 shift = -5;
 console.log(caesar(sentence, shift));
-
-// module.exports = caesar
