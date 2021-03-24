@@ -1,7 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
-  background: #6e7986;
+  background: #95a3b4;
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -12,9 +12,16 @@ body {
   justify-content: center;
 }
 
+#description {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+}
+
 #input {
   display: flex;
   justify-content: center;
+  margin-top: 25px;
 }
 
 #buttons {

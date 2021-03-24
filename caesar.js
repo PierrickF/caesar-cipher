@@ -15,8 +15,19 @@ reset.addEventListener("click", function() {                            // when 
 })
 
 function getInputValue() {
-    let inputValue = Number(document.getElementById("inputValue").value);   // get the value enterd and convert it
-    return inputValue;
+    let inputValue = document.getElementById("inputValue").value;       // get the value enterd and convert it
+    if (isNaN(inputValue) == true) {                                    // check that the input is a number
+        alert("Please enter a number.");                                // notify the user
+        throw new Error("Bad user input.");                             // stop code execution
+    }
+    else if (Number(inputValue) > 1000 | Number(inputValue) < -1000) {  // check that the input is between -1k and 1k
+        alert("Please enter a number between -1000 and 1000.");         // notify the user
+        throw new Error("Bad user input.");                             // stop code execution
+    }
+    else {
+        return Number(inputValue);
+    }
+    
 }
 
 function caesar(sentence, key) {
