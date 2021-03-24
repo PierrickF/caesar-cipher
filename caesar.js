@@ -2,10 +2,17 @@ let originalText = document.getElementById("text").outerHTML;           // save 
 
 apply.addEventListener("click", function() {                            // when the user clicks the Apply button
     let key = getInputValue();                                          // get the value they entered in the field
-    let sentence = document.getElementById("text").innerHTML;           // get the text currently displayed
-    let newText = caesar(sentence, key);                                // use these two values to run the cipher
-    document.getElementById("text").innerHTML = newText;                // update the text on screen
+    for (let i = 0; i < 14; i++) {      // this loop is necessary to run the cipher line by line and keep line breaks
+        let sentence = document.getElementById(`line${i}`).innerHTML;   // get the text currently displayed
+        let newText = caesar(sentence, key);                            // use these two values to run the cipher
+        document.getElementById(`line${i}`).innerHTML = newText;        // update the text on screen
+    }
+    
 });
+
+reset.addEventListener("click", function() {                            // when the user clicks the Reset button
+    document.getElementById("text").outerHTML = originalText;           // reset the text on screen
+})
 
 function getInputValue() {
     let inputValue = Number(document.getElementById("inputValue").value);   // get the value enterd and convert it
@@ -122,7 +129,3 @@ function caesar(sentence, key) {
         return sentence;
     }
 }
-
-reset.addEventListener("click", function() {                            // when the user clicks the Reset button
-    document.getElementById("text").outerHTML = originalText;           // reset the text on screen
-})
