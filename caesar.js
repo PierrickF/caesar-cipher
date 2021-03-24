@@ -1,4 +1,4 @@
-const caesar = function(sentence, shift) {
+function caesar(sentence, key) {
 
     alphabetLow = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", 
     "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -23,7 +23,7 @@ const caesar = function(sentence, shift) {
         originalArray.push(sentence.charCodeAt(i));
     }
 
-    if (shift > 0) {
+    if (key > 0) {
 
         newArray = []                               // values converted back from unicode to string will go in this array
 
@@ -31,40 +31,40 @@ const caesar = function(sentence, shift) {
 
             if (String.fromCharCode(j).match(/[a-z]/)) {            // if the converted value is a small letter
                 let index = unicodeLow.indexOf(j);                  // find its index in unicodeLow
-                let shifter = index + shift + 1;                    // compute how far to go in a loop to get the new value
+                let keyer = index + key + 1;                    // compute how far to go in a loop to get the new value
 
-                let shifted = 0;                                    // the new value will go in this variable
+                let keyed = 0;                                    // the new value will go in this variable
 
-                for (let k = 0; k < shifter; k++) {                 // loop until reaching the new unicode
-                    shifted = unicodeLow[k%unicodeLow.length];      // this line allows looping nultiple times  
+                for (let k = 0; k < keyer; k++) {                 // loop until reaching the new unicode
+                    keyed = unicodeLow[k%unicodeLow.length];      // this line allows looping nultiple times  
                 }
 
-                newArray.push(shifted);                             // add this value to the new array
+                newArray.push(keyed);                             // add this value to the new array
             }
 
             else if (String.fromCharCode(j).match(/[A-Z]/)) {       // if the converted value is a capital letter
                 let index = unicodeCap.indexOf(j);                  // find its index in unicodeCap
-                let shifter = index + shift + 1;                    // compute how far to go in a loop to get the new value
+                let keyer = index + key + 1;                    // compute how far to go in a loop to get the new value
 
-                let shifted = 0;                                    // the new value will go in this variable
+                let keyed = 0;                                    // the new value will go in this variable
 
-                for (let k = 0; k < shifter; k++) {                 // loop until reaching the new unicode
-                    shifted = unicodeCap[k%unicodeCap.length];      // this line allows looping nultiple times  
+                for (let k = 0; k < keyer; k++) {                 // loop until reaching the new unicode
+                    keyed = unicodeCap[k%unicodeCap.length];      // this line allows looping nultiple times  
                 }
 
-                newArray.push(shifted);                             // add this value to the new array
+                newArray.push(keyed);                             // add this value to the new array
             }
 
             else {                                                  // if the converted value is not a letter
-                newArray.push(j);                                   // do not shift it
+                newArray.push(j);                                   // do not key it
             }
         }
         return String.fromCharCode.apply(null, newArray);
     }
 
-    else if (shift < 0) {
+    else if (key < 0) {
 
-        shift *= -1;
+        key *= -1;
         let uniLowRev = unicodeLow.reverse();
         let uniCapRev = unicodeCap.reverse();
 
@@ -74,42 +74,49 @@ const caesar = function(sentence, shift) {
 
             if (String.fromCharCode(j).match(/[a-z]/)) {            // if the converted value is a small letter
                 let index = uniLowRev.indexOf(j);                  // find its index in unicodeLow
-                let shifter = index + shift + 1;                    // compute how far to go in a loop to get the new value
+                let keyer = index + key + 1;                    // compute how far to go in a loop to get the new value
 
-                let shifted = 0;                                    // the new value will go in this variable
+                let keyed = 0;                                    // the new value will go in this variable
 
-                for (let k = 0; k < shifter; k++) {                 // loop until reaching the new unicode
-                    shifted = uniLowRev[k%uniLowRev.length];      // this line allows looping nultiple times  
+                for (let k = 0; k < keyer; k++) {                 // loop until reaching the new unicode
+                    keyed = uniLowRev[k%uniLowRev.length];      // this line allows looping nultiple times  
                 }
 
-                newArray.push(shifted);                             // add this value to the new array
+                newArray.push(keyed);                             // add this value to the new array
             }
 
             else if (String.fromCharCode(j).match(/[A-Z]/)) {       // if the converted value is a capital letter
                 let index = uniCapRev.indexOf(j);                  // find its index in unicodeCap
-                let shifter = index + shift + 1;                    // compute how far to go in a loop to get the new value
+                let keyer = index + key + 1;                    // compute how far to go in a loop to get the new value
 
-                let shifted = 0;                                    // the new value will go in this variable
+                let keyed = 0;                                    // the new value will go in this variable
 
-                for (let k = 0; k < shifter; k++) {                 // loop until reaching the new unicode
-                    shifted = uniCapRev[k%uniCapRev.length];      // this line allows looping nultiple times  
+                for (let k = 0; k < keyer; k++) {                 // loop until reaching the new unicode
+                    keyed = uniCapRev[k%uniCapRev.length];      // this line allows looping nultiple times  
                 }
 
-                newArray.push(shifted);                             // add this value to the new array
+                newArray.push(keyed);                             // add this value to the new array
             }
 
             else {                                                  // if the converted value is not a letter
-                newArray.push(j);                                   // do not shift it
+                newArray.push(j);                                   // do not key it
             }
         }
         return String.fromCharCode.apply(null, newArray);
     }
 
-    else if (shift == 0) {
+    else if (key == 0) {
         return sentence;
     }
 }
 
+function newKey () {
+    document.getElementById("keyInput").value = key;
+    apply.addEventListener("click", function () {
+        caesar();
+    });
+}
+
 sentence = "Hello, World!";
-shift = -5;
-console.log(caesar(sentence, shift));
+key = -5;
+console.log(caesar(sentence, key));
